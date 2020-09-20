@@ -1,0 +1,104 @@
+// require the discord.js module
+const Discord = require('discord.js');
+//require the config file
+const { prefix, token } = require('./config.json');
+// create a new Discord client
+const client = new Discord.Client();
+
+// when the client is ready, run this code
+// this event will only trigger one time after logging in
+client.once('ready', () => {
+	console.log('Ready!');
+});
+
+//Fun commands
+client.on('message', message => {
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const command = args.shift().toLowerCase();
+    if (command === 'ping') {
+        message.channel.send('Pong.');
+    }else if (command === 'beep') {
+        message.channel.send('boop.');
+    }else if (command === 'penis') {
+        message.channel.send('pongus.');
+    }else if (command === 'mo') {
+        message.channel.send('@mo. your a bitch');
+    }else if (command === 'mo2') {
+        message.channel.send('@mo, you have a small peepee 8=D.');
+    }else if (command === 'smith') {
+        message.channel.send('@SMITH, You have the biggest peepee 8=====================D');
+    }
+
+
+
+});
+
+
+//Server info
+client.on('message', message => {
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const command = args.shift().toLowerCase();
+    //Server name, Member Count, Creation Date, Server Region
+    if (message.content === `${prefix}server`){
+        message.channel.send(`This server's name is: ${message.guild.name}\nTotal members: ${message.guild.memberCount}\nCreation Date: ${message.guild.createdAt}\nServer Region: ${message.guild.region}`);
+    }  
+    //user-info
+    else if (message.content === `${prefix}user-info`) {
+        message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
+    }
+    //Arg info
+    else if (command === 'args-info') {
+        if (!args.length) {
+            return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
+        }
+    
+        message.channel.send(`Command name: ${command}\nArguments: ${args}`);
+    }
+    //Kick Command
+    else if (command === 'kick') {
+        if (!message.mentions.users.size) {
+            return message.reply('you need to tag a user in order to kick them!');
+        }
+        const taggedUser = message.mentions.users.first();
+        message.channel.send(`You wanted to kick: ${taggedUser.username}`);
+    }
+    //help Command
+    else if (command === 'help') {
+        return message.reply(`please stop being a bitch. Let me be built.`);
+    }
+    //Avatar Command
+    else if (command === 'avatar') {
+        if (!message.mentions.users.size) {
+            return message.channel.send(`Your avatar: <${message.author.displayAvatarURL({ format: "png", dynamic: true })}>`);
+        }
+    
+        const avatarList = message.mentions.users.map(user => {
+            return `${user.username}'s avatar: <${user.displayAvatarURL({ format: "png", dynamic: true })}>`;
+        });
+    
+        // send the entire array of strings as a message
+        // by default, discord.js will `.join()` the array with `\n`
+        message.channel.send(avatarList);
+    }
+    //Prune Command
+    else if (command === 'prune') {
+		const amount = parseInt(args[0]) + 1;
+
+		if (isNaN(amount)) {
+			return message.reply('that doesn\'t seem to be a valid number.');
+		} else if (amount <= 1 || amount > 100) {
+			return message.reply('you need to input a number between 1 and 99.');
+		}
+
+		message.channel.bulkDelete(amount, true).catch(err => {
+			console.error(err);
+			message.channel.send('there was an error trying to prune messages in this channel!');
+		});
+	}
+});
+// login to Discord with your app's token
+client.login(token);
