@@ -16,7 +16,7 @@ const cooldowns = new Discord.Collection();
 
 
 client.once('ready', () => {
-    console.log(`SKYNET ACTIVATED.......ONLINE\nGUILDS Infected: ${client.guilds.cache.size}\nHOSTS Infected: ${client.users.cache.size}`);
+	console.log(`SKYNET ACTIVATED.......ONLINE\nGUILDS Infected: ${client.guilds.cache.size}\nHOSTS Infected: ${client.users.cache.size}`);
 });
 
 client.on('message', message => {
@@ -66,7 +66,8 @@ client.on('message', message => {
 
 	try {
 		command.execute(message, args);
-	} catch (error) {
+	}
+	catch (error) {
 		console.error(error);
 		message.reply('there was an error trying to execute that command!');
 	}
