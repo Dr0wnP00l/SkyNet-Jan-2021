@@ -1,8 +1,7 @@
 module.exports = {
 	name: 'ping',
-	description: 'Ping!',
-	cooldown: 5,
+	description: 'Ping -> Pong! Also includes Ping Latency',
 	execute(message) {
-		message.channel.send('Pong.');
+		message.channel.send('->Pong.');
 	},
 };

@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'kick',
 	description: 'Tag a member and kick them (but not really).',
+	usage: "<@user>",
 	guildOnly: true,
 	execute(message) {
 		if (!message.mentions.users.size) {
@@ -9,6 +10,7 @@ module.exports = {
 
 		const taggedUser = message.mentions.users.first();
 
-		message.channel.send(`You wanted to kick: ${taggedUser.username}`);
+		message.channel.send(`You wanted to kick ${taggedUser.username}. Nice try! You are not the correct role. Sorry Chap.`);
+		
 	},
 };

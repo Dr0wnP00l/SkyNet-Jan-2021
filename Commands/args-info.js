@@ -1,16 +1,16 @@
+const { run } = require("./avatar");
+
 module.exports = {
-	name: 'avatar',
-	description: 'Get the avatar URL of the tagged user(s), or your own avatar.',
-	aliases: ['icon', 'pfp'],
-	execute(message) {
-		if (!message.mentions.users.size) {
-			return message.channel.send(`Your avatar: <${message.author.displayAvatarURL({ dynamic: true })}>`);
-		}
-
-		const avatarList = message.mentions.users.map(user => {
-			return `${user.username}'s avatar: <${user.displayAvatarURL({ dynamic: true })}>`;
-		});
-
-		message.channel.send(avatarList);
-	},
+    name: 'args-info',
+    description: 'Information about the arguments provided',
+    args: true,
+	usage: '*args-info [arguments]',
+	cooldown: 5,
+    execute(client, kayn, REGIONS, config, message, args, con, guilds) {
+        if (args[0] === 'foo') {
+            return message.channel.send('bar');
+        }
+        message.channel.send(`Arguments: ${args}`);
+        message.channel.send(`First Argument: ${args[0]}`);
+    },
 };

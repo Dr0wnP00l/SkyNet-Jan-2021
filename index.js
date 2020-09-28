@@ -16,8 +16,134 @@ const cooldowns = new Discord.Collection();
 
 
 client.once('ready', () => {
-	console.log(`SKYNET ACTIVATED.......ONLINE\nGUILDS Infected: ${client.guilds.cache.size}\nHOSTS Infected: ${client.users.cache.size}`);
+	const skynet_log = `SKYNET ACTIVATED\nStatus.......ONLINE\nServers Infected: ${client.guilds.cache.size}\nHOSTS Infected: ${client.users.cache.size}`;
+	console.log(skynet_log);
 });
+
+client.on('message', message =>{
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const tell = args.shift().toLowerCase();
+	const skynet_log = `***SKYNET ACTIVATED***\nStatus.....................__ONLINE__\nServers Infected: ${client.guilds.cache.size}\nHOSTS Infected: ${client.users.cache.size}`;
+	if (tell === 'skynet_status') {
+		message.delete();
+		message.channel.send(skynet_log);
+	}
+});
+
+
+//Log specified channels
+client.on('message', message => {
+	if(!message.content.startsWith(prefix) || message.author.bot) return;
+
+	const args = message.content.slice(prefix.length).trim().split(/ +/);
+	const tell = args.shift().toLowerCase();
+	if( tell === 'dispatch'){
+					const sayMessage = args.join(' ');
+				//Grabs the message
+					const anGrab=/^\b([aA]nnouncement)\b/;
+					const noteGrab=/^\b([nN]ote)\b/;
+					const loGrab=/^\b([lL]og)\b/;
+					const adminGrab=/^\b([aA]dminlog)\b/;
+		
+				//Compares 
+					const anInfo=sayMessage.match(anGrab);
+					const noteInfo=sayMessage.match(noteGrab);
+					const logInfo=sayMessage.match(loGrab);
+					const adminInfo=sayMessage.match(adminGrab);
+
+
+				//If matches the command, log to specified channel
+					if (adminInfo){
+
+						//Embed
+						const adBed = {
+							color: 0x800000,
+							title: `Admin Log`,
+							fields: [	
+								{ 
+									name: sayMessage,
+									value: '\u200B',
+								},
+		
+							],
+							timestamp: new Date(),
+						};	
+
+						//Return
+						client.channels.cache.get(`759552509407920168`).send({embed: adBed});
+
+					}
+					else if(anInfo){
+
+						//Embed
+						const anBed = {
+							color: 0xFFFF00	,
+							title: `Announcement`,
+							fields: [	
+								{ 
+									name: sayMessage,
+									value:'\u200B' ,
+								},
+		
+							],
+							timestamp: new Date(),
+						};
+
+						//Return
+						client.channels.cache.get(`758805789698818048`).send({embed: anBed});
+					}
+					else if(logInfo){
+
+						//Embed
+						const logBed = {
+							color: 0x8B008B	,
+							title: `Log`,
+							fields: [	
+								{ 
+									name: sayMessage,
+									value:'\u200B' ,
+								},
+		
+							],
+							timestamp: new Date(),
+						};
+
+						//Return
+						client.channels.cache.get(`759112177378132028`).send({embed: logBed});
+					}
+					else if(noteInfo){
+
+						//Embed
+						const noteBed = {
+							color: 0x8B008B	,
+							title: `Note`,
+							fields: [	
+								{ 
+									name: sayMessage,
+									value:'\u200B' ,
+								},
+		
+							],
+							timestamp: new Date(),
+						};
+
+						//Return
+						client.channels.cache.get(`759552579414917170`).send({embed: noteBed});
+			}
+					else{
+						message.reply(`You didn't provide any arguments, ${message.author}!`);
+					}
+					message.delete();
+		
+				}		
+});
+
+
+
+
+
 
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -66,8 +192,7 @@ client.on('message', message => {
 
 	try {
 		command.execute(message, args);
-	}
-	catch (error) {
+	} catch (error) {
 		console.error(error);
 		message.reply('there was an error trying to execute that command!');
 	}

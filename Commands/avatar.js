@@ -1,9 +1,10 @@
+/*
 module.exports = {
 	name: 'avatar',
 	aliases: ['icon', 'logo'],
 	description: 'display the image and url of users\' avatar',
 	usage: '[tagged users]',
-	execute(client, kayn, REGIONS, config, message) {
+	async run(client, REGIONS, config, message) {
 		if (!message.mentions.users.size) {
 			return message.channel.send(`Your avatar: ${message.author.displayAvatarURL}`);
 		}
@@ -17,3 +18,4 @@ module.exports = {
 		message.channel.send(avatarList);
 	},
 };
+*/

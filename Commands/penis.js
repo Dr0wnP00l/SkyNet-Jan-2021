@@ -1,8 +1,8 @@
 module.exports = {
 	name: 'penis',
-	description: 'penis!',
-
+	description: 'penis -> Pongus!',
+	usage: "*penis",
 	execute(message) {
-		message.channel.send('Pongus.');
+		message.channel.send('->Pongus!');
 	},
 };
