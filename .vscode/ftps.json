@@ -1,0 +1,9 @@
+{
+    "name": "SkyNet",
+    "host": "ftp.drownpool.hackanoob.net",
+    "protocol": "ftps",
+    "port": 21,
+    "username": "SkyNet@drownpool.hackanoob.net",
+    "remotePath": "./SkyNet",
+    "uploadOnSave": true
+}

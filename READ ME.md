@@ -42,7 +42,7 @@ You need to personalize your own config with the following information:
                     -*user-info @<user>
     - args-info - gives info regarding the arguments entered by the user
                     -*args-info <text>
-    - avatar - shows the link of a user's avatar
+    - avatar - shows the link of a user's avatar  (in-progress)
                     -*avatar @<user>  (others)
                     -*avatar          (self)
     - beep - responds with boop
@@ -62,6 +62,7 @@ You need to personalize your own config with the following information:
                     -*target [number] [low/med/high] [Domain] [IP]
     - dispatch - Send message in specified Server
                     -*dispatch [log/adminlog/announcement/note] <text>
+                    - Must edit for your servers channel id
     - tp - Demands tp from players
                     -*tp @<user>
     - say - Say something as a bot 
